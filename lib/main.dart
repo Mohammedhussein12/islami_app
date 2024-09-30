@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami/screens/home_screen.dart';
 
 void main() {
   runApp(const IslamiApp());
@@ -9,7 +10,12 @@ class IslamiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        // Add other routes here
+      },
+      initialRoute: HomeScreen.routeName,
       debugShowCheckedModeBanner: false,
     );
   }
