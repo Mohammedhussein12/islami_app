@@ -8,6 +8,10 @@ class AppTheme {
   static const Color black = Color(0xff242424);
   static const Color gold = Color(0xffFACC1D);
   static ThemeData lightTheme = ThemeData(
+    dividerTheme: const DividerThemeData(
+      thickness: 3,
+      color: lightPrimary,
+    ),
     primaryColor: lightPrimary,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: lightPrimary,
@@ -17,18 +21,23 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
+      foregroundColor: black,
       titleTextStyle:
           TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 30),
       backgroundColor: Colors.transparent,
       centerTitle: true,
     ),
     textTheme: const TextTheme(
-      titleLarge: TextStyle(color: black, fontSize: 20),
+      titleLarge: TextStyle(color: black, fontSize: 20,fontWeight: FontWeight.w400),
       headlineSmall:
-          TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: black),
+          TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: black),
     ),
   );
   static ThemeData darkTheme = ThemeData(
+    dividerTheme: const DividerThemeData(
+      thickness: 3,
+      color: gold,
+    ),
     primaryColor: darkPrimary,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: darkPrimary,
