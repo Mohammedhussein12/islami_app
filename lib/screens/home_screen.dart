@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
+          fit: BoxFit.fill,
           image: AssetImage('assets/images/default_bg.png'),
         ),
       ),
