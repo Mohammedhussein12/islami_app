@@ -3,28 +3,26 @@ import 'package:flutter/services.dart';
 import 'package:islami/tabs/quran/sura_details_args.dart';
 import '../../utils/app_theme.dart';
 
-class SuraContentScreen extends StatelessWidget {
+class SuraContentScreen extends StatefulWidget {
   static const String routeName = '/suraContentScreen';
 
-  List<String> ayat = [
-    'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم',
-    'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-    'الرَّحْمَنِ الرَّحِيمِ',
-    'مَالِكِ يَوْمِ الدِّينِ',
-    'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِين',
-    'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيم',
-    'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّين'
-  ];
-  late SuraDetailsArgs args;
-
   SuraContentScreen({super.key});
+
+  @override
+  State<SuraContentScreen> createState() => _SuraContentScreenState();
+}
+
+class _SuraContentScreenState extends State<SuraContentScreen> {
+  List<String> ayat = [];
+
+  late SuraDetailsArgs args;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
-    loadSuraFile();
+    loadSuraFile(args.index);
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -39,14 +37,14 @@ class SuraContentScreen extends StatelessWidget {
         body: Container(
           padding: EdgeInsets.only(top: height * 0.02),
           margin: EdgeInsets.only(
-              top: height * 0.02,
+              top: height * 0.01,
               bottom: height * 0.02,
               left: width * 0.07,
               right: width * 0.07),
           height: height * 0.74,
           width: width * 0.86,
           decoration: BoxDecoration(
-            color: AppTheme.white,
+            color: AppTheme.white.withOpacity(0.7),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
@@ -55,7 +53,7 @@ class SuraContentScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    args.suraName,
+                    "سورة ${args.suraName}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   IconButton(
@@ -91,5 +89,10 @@ class SuraContentScreen extends StatelessWidget {
     );
   }
 
-  void loadSuraFile() {}
+  void loadSuraFile(int index) async {
+    final String suraText =
+        await rootBundle.loadString('assets/text/${index + 1}.txt');
+    ayat = suraText.trim().split('\n');
+    setState(() {});
+  }
 }
