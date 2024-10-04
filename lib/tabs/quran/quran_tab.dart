@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami/controllers/sura_controller.dart';
 import 'package:islami/tabs/quran/quran_item.dart';
 import 'package:islami/tabs/quran/sura_content_screen.dart';
+import 'package:islami/tabs/quran/sura_details_args.dart';
 
 class QuranTab extends StatelessWidget {
   const QuranTab({super.key});
@@ -92,11 +93,4 @@ class QuranTab extends StatelessWidget {
       ),
     );
   }
-}
-
-class SuraDetailsArgs {
-  String suraName;
-  int index;
-
-  SuraDetailsArgs({required this.suraName, required this.index});
 }

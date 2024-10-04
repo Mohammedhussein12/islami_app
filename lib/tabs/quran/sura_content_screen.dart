@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami/tabs/quran/quran_tab.dart';
-
+import 'package:islami/tabs/quran/sura_details_args.dart';
 import '../../utils/app_theme.dart';
 
 class SuraContentScreen extends StatelessWidget {
@@ -92,7 +91,5 @@ class SuraContentScreen extends StatelessWidget {
     );
   }
 
-  void loadSuraFile() {
-    print(args.index);
-  }
+  void loadSuraFile() {}
 }
