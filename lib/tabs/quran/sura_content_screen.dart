@@ -19,9 +19,18 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    args = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as SuraDetailsArgs;
     loadSuraFile(args.index);
     return Container(
       decoration: const BoxDecoration(
@@ -54,7 +63,10 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
                 children: [
                   Text(
                     "سورة ${args.suraName}",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineSmall,
                   ),
                   IconButton(
                     onPressed: () {},
@@ -73,10 +85,16 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
               Expanded(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-                    return Text(
-                      textAlign: TextAlign.center,
-                      ayat[index],
-                      style: Theme.of(context).textTheme.titleLarge,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        ayat[index],
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .titleLarge,
+                      ),
                     );
                   },
                   itemCount: ayat.length,
@@ -91,8 +109,8 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
 
   void loadSuraFile(int index) async {
     final String suraText =
-        await rootBundle.loadString('assets/text/${index + 1}.txt');
-    ayat = suraText.trim().split('\n');
+    await rootBundle.loadString('assets/text/${index + 1}.txt');
+    ayat = suraText.split('\n');
     setState(() {});
   }
 }
