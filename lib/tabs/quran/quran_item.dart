@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class QuranItem extends StatelessWidget {
   String item;
-  int index;
 
-  QuranItem({super.key, required this.item, required this.index});
+  QuranItem({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,10 @@ class QuranItem extends StatelessWidget {
       child: Text(
         textAlign: TextAlign.center,
         item,
-        style: Theme.of(context).textTheme.headlineSmall,
+        style: Theme.of(context)
+            .textTheme
+            .headlineSmall!
+            .copyWith(fontFamily: 'regular'),
       ),
     );
   }
