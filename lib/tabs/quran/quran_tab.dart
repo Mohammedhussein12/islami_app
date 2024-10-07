@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:islami/controllers/sura_controller.dart';
 import 'package:islami/tabs/quran/quran_item.dart';
 import 'package:islami/tabs/quran/sura_content_screen.dart';
 import 'package:islami/tabs/quran/sura_details_args.dart';
+
+import '../../controllers/sura_controller.dart';
 
 class QuranTab extends StatelessWidget {
   const QuranTab({super.key});
@@ -25,7 +26,7 @@ class QuranTab extends StatelessWidget {
                   Border.all(color: Theme.of(context).primaryColor, width: 3),
             ),
             width: double.infinity,
-            height: height * 0.1,
+            height: height * 0.13,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -36,7 +37,7 @@ class QuranTab extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
                 Padding(
@@ -51,7 +52,7 @@ class QuranTab extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
               ],
@@ -64,15 +65,16 @@ class QuranTab extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                        child: QuranItem(
-                            item: suraController.versesNumber[index].toString(),
-                            index: index)),
+                      child: QuranItem(
+                        item: suraController.versesNumber[index].toString(),
+                      ),
+                    ),
                     const VerticalDivider(),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed(
-                            SuraContentScreen.routeName,
+                            SuraDetailsScreen.routeName,
                             arguments: SuraDetailsArgs(
                                 suraName: suraController.suraNames[index],
                                 index: index),
@@ -80,7 +82,6 @@ class QuranTab extends StatelessWidget {
                         },
                         child: QuranItem(
                           item: suraController.suraNames[index],
-                          index: index,
                         ),
                       ),
                     ),

@@ -15,7 +15,7 @@ class IslamiApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
-        SuraContentScreen.routeName: (context) => SuraContentScreen(),
+        SuraDetailsScreen.routeName: (context) => const SuraDetailsScreen(),
         // Add other routes here
       },
       initialRoute: HomeScreen.routeName,
