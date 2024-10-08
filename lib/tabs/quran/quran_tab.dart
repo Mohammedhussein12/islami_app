@@ -40,11 +40,7 @@ class QuranTab extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: width * 0.05),
-                  child: const VerticalDivider(),
-                ),
-                const SizedBox(width: 16),
+                const VerticalDivider(),
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
