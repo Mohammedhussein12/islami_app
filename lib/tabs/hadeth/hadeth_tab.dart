@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/widgets/loading_indicator.dart';
+import 'package:provider/provider.dart';
+import '../settings/settings_provider.dart';
 import 'hadeth.dart';
 import 'hadeth_content_screen.dart';
 
@@ -16,6 +18,7 @@ class _HadethTabState extends State<HadethTab> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     if (ahadeth.isEmpty) {
@@ -58,10 +61,16 @@ class _HadethTabState extends State<HadethTab> {
                             child: Text(
                               textAlign: TextAlign.center,
                               ahadeth[index].title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontSize: 25),
+                              style: settingsProvider.isDark
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          fontSize: 25, color: Colors.white)
+                                  : Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(fontSize: 25),
                             ),
                           ),
                         ),

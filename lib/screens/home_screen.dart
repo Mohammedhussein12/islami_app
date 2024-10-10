@@ -3,7 +3,9 @@ import 'package:islami/tabs/hadeth/hadeth_tab.dart';
 import 'package:islami/tabs/quran/quran_tab.dart';
 import 'package:islami/tabs/radio/radio_tab.dart';
 import 'package:islami/tabs/sebha/sebha_tab.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:islami/tabs/settings/settings_tab.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/HomeScreen';
@@ -26,16 +28,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/default_bg.png'),
+          image: settingsProvider.isDark
+              ? const AssetImage('assets/images/dark_bg.png')
+              : const AssetImage('assets/images/default_bg.png'),
         ),
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('إسلامي'),
+          title: Text(
+              'إسلامي',
+              style: settingsProvider.isDark
+                  ? Theme
+                  .of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white)
+                  : Theme
+                  .of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+          ),
         ),
         body: tabs[currentIndex],
         bottomNavigationBar: BottomNavigationBar(

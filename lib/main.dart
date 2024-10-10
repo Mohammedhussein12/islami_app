@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:islami/screens/home_screen.dart';
 import 'package:islami/tabs/hadeth/hadeth_content_screen.dart';
 import 'package:islami/tabs/quran/sura_content_screen.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:islami/utils/app_theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const IslamiApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SettingsProvider(),
+      child: const IslamiApp(),
+    ),
+  );
 }
 
 class IslamiApp extends StatelessWidget {
@@ -13,6 +20,7 @@ class IslamiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
@@ -23,7 +31,7 @@ class IslamiApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      themeMode: ThemeMode.light,
+      themeMode: settingsProvider.themeMode,
       darkTheme: AppTheme.darkTheme,
     );
   }

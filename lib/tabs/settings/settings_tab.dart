@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
+import '../../utils/app_theme.dart';
 import 'language.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -17,6 +20,7 @@ class _SettingsTabState extends State<SettingsTab> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,8 +41,12 @@ class _SettingsTabState extends State<SettingsTab> {
                       .copyWith(fontWeight: FontWeight.w500),
                 ),
                 Switch(
-                  value: true,
-                  onChanged: (value) {},
+                  activeTrackColor: AppTheme.gold,
+                  value: settingsProvider.themeMode == ThemeMode.dark,
+                  onChanged: (isDark) {
+                    settingsProvider.changeThemeMode(
+                        isDark ? ThemeMode.dark : ThemeMode.light);
+                  },
                 ),
               ],
             ),
@@ -57,12 +65,20 @@ class _SettingsTabState extends State<SettingsTab> {
                 ),
                 DropdownButtonHideUnderline(
                   child: DropdownButton<Language>(
+                    dropdownColor: settingsProvider.isDark
+                        ? AppTheme.darkPrimary
+                        : AppTheme.white,
                     borderRadius: BorderRadius.circular(20),
                     value: languages.first,
                     items: languages.map((language) {
                       return DropdownMenuItem(
                         value: language,
-                        child: Text(language.name),
+                        child: Text(language.name,
+                            style: TextStyle(
+                              color: settingsProvider.isDark
+                                  ? AppTheme.gold
+                                  : AppTheme.black,
+                            )),
                       );
                     }).toList(),
                     onChanged: (selsctedLanguage) {

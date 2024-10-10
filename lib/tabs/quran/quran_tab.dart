@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:islami/tabs/quran/quran_item.dart';
 import 'package:islami/tabs/quran/sura_content_screen.dart';
 import 'package:islami/tabs/quran/sura_details_args.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:islami/utils/app_theme.dart';
+import 'package:provider/provider.dart';
 
 import '../../controllers/sura_controller.dart';
 
@@ -10,6 +13,7 @@ class QuranTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     final SuraController suraController = SuraController();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -22,8 +26,11 @@ class QuranTab extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).primaryColor, width: 3),
+              border: Border.all(
+                  color: settingsProvider.isDark
+                      ? AppTheme.gold
+                      : AppTheme.lightPrimary,
+                  width: 3),
             ),
             width: double.infinity,
             height: height * 0.13,

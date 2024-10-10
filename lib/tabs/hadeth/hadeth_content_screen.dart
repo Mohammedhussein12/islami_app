@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 import '../../utils/app_theme.dart';
 import 'hadeth.dart';
 import 'hadeth_content_item.dart';
@@ -16,13 +18,16 @@ class _HadethContentScreenState extends State<HadethContentScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     final width = MediaQuery.of(context).size.width;
     var hadeth = ModalRoute.of(context)!.settings.arguments as Hadeth;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/default_bg.png'),
+          image: settingsProvider.isDark
+              ? const AssetImage('assets/images/dark_bg.png')
+              : const AssetImage('assets/images/default_bg.png'),
         ),
       ),
       child: Scaffold(
@@ -38,7 +43,9 @@ class _HadethContentScreenState extends State<HadethContentScreen> {
           height: height * 0.77,
           width: width * 0.86,
           decoration: BoxDecoration(
-            color: AppTheme.white.withOpacity(0.7),
+            color: settingsProvider.isDark
+                ? AppTheme.darkPrimary.withOpacity(0.7)
+                : AppTheme.white.withOpacity(0.7),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
@@ -48,23 +55,24 @@ class _HadethContentScreenState extends State<HadethContentScreen> {
                 children: [
                   Text(
                     hadeth.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(fontFamily: 'regular')
-                        .copyWith(fontSize: 18),
+                    style: settingsProvider.isDark
+                        ? Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(fontFamily: 'regular')
+                            .copyWith(fontSize: 18, color: AppTheme.gold)
+                        : Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(fontFamily: 'regular')
+                            .copyWith(fontSize: 18, color: AppTheme.black),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.play_circle,
-                      size: 27,
-                    ),
-                  )
                 ],
               ),
-              Divider(
+              const Divider(
                 thickness: 1,
+                indent: 20,
+                endIndent: 20,
               ),
               Expanded(
                 child: ListView.builder(
