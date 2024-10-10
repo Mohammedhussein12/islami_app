@@ -5,7 +5,7 @@ import 'package:islami/tabs/quran/sura_details_args.dart';
 import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:islami/utils/app_theme.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../controllers/sura_controller.dart';
 
 class QuranTab extends StatelessWidget {
@@ -40,22 +40,18 @@ class QuranTab extends StatelessWidget {
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    'عدد الآيات',
+                    AppLocalizations.of(context)!.verses_number,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
                         .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: width * 0.05),
-                  child: const VerticalDivider(),
-                ),
-                const SizedBox(width: 16),
+                const VerticalDivider(),
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    'إسم السورة',
+                    AppLocalizations.of(context)!.sura_name,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!

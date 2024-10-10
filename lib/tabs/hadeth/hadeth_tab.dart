@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../settings/settings_provider.dart';
 import 'hadeth.dart';
 import 'hadeth_content_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HadethTab extends StatefulWidget {
   const HadethTab({super.key});
@@ -35,7 +36,7 @@ class _HadethTabState extends State<HadethTab> {
           const Divider(),
           Center(
             child: Text(
-              'الأحاديث',
+              AppLocalizations.of(context)!.hadiths,
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!

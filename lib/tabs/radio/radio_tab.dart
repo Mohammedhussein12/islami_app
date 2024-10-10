@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../utils/app_theme.dart';
 import '../settings/settings_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RadioTab extends StatelessWidget {
   const RadioTab({super.key});
@@ -21,7 +22,7 @@ class RadioTab extends StatelessWidget {
             height: height * 0.25,
           ),
           SizedBox(height: height * 0.06),
-          Text('إذاعة القرآن الكريم',
+          Text(AppLocalizations.of(context)!.holy_quran_radio,
               style: Theme.of(context).textTheme.headlineSmall),
           SizedBox(height: height * 0.06),
           Row(
@@ -30,8 +31,9 @@ class RadioTab extends StatelessWidget {
               IconButton(
                 onPressed: () {},
                 icon: ImageIcon(
-                  color:
-                      settingsProvider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
+                  color: settingsProvider.isDark
+                      ? AppTheme.gold
+                      : AppTheme.lightPrimary,
                   settingsProvider.isDark
                       ? const AssetImage(
                           'assets/images/Icon metro-previous_gold.png')
@@ -42,8 +44,9 @@ class RadioTab extends StatelessWidget {
               IconButton(
                 onPressed: () {},
                 icon: ImageIcon(
-                  color:
-                      settingsProvider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
+                  color: settingsProvider.isDark
+                      ? AppTheme.gold
+                      : AppTheme.lightPrimary,
                   settingsProvider.isDark
                       ? const AssetImage(
                           'assets/images/Icon awesome-play_gold.png')
@@ -53,7 +56,9 @@ class RadioTab extends StatelessWidget {
               IconButton(
                 onPressed: () {},
                 icon: ImageIcon(
-                  color: settingsProvider.isDark?AppTheme.gold:AppTheme.lightPrimary,
+                  color: settingsProvider.isDark
+                      ? AppTheme.gold
+                      : AppTheme.lightPrimary,
                   settingsProvider.isDark
                       ? const AssetImage(
                           'assets/images/Icon metro-next_gold.png')

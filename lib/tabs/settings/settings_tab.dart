@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../utils/app_theme.dart';
 import 'language.dart';
 
@@ -34,7 +34,7 @@ class _SettingsTabState extends State<SettingsTab> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Dark Theme',
+                  AppLocalizations.of(context)!.dark_theme,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -57,7 +57,7 @@ class _SettingsTabState extends State<SettingsTab> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Language',
+                  AppLocalizations.of(context)!.language_name,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -69,21 +69,27 @@ class _SettingsTabState extends State<SettingsTab> {
                         ? AppTheme.darkPrimary
                         : AppTheme.white,
                     borderRadius: BorderRadius.circular(20),
-                    value: languages.first,
+                    // بدور على العنصر الى فى الليست الى الكود بتاعها نفس الكود الى فى ال provider الى يعنى اليوزر اختارها
+                    value: languages.firstWhere(
+                      (language) =>
+                          settingsProvider.languageCode == language.code,
+                    ),
                     items: languages.map((language) {
                       return DropdownMenuItem(
                         value: language,
-                        child: Text(language.name,
-                            style: TextStyle(
-                              color: settingsProvider.isDark
-                                  ? AppTheme.gold
-                                  : AppTheme.black,
-                            )),
+                        child: Text(
+                          language.name,
+                          style: TextStyle(
+                            color: settingsProvider.isDark
+                                ? AppTheme.gold
+                                : AppTheme.black,
+                          ),
+                        ),
                       );
                     }).toList(),
                     onChanged: (selsctedLanguage) {
                       if (selsctedLanguage != null) {
-                        print(selsctedLanguage.code);
+                        settingsProvider.changeLanguage(selsctedLanguage.code);
                       }
                     },
                   ),
