@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../utils/app_theme.dart';
 
 class SebhaTab extends StatefulWidget {
   const SebhaTab({super.key});
@@ -16,6 +20,7 @@ class _SebhaTabState extends State<SebhaTab> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -23,12 +28,19 @@ class _SebhaTabState extends State<SebhaTab> {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  fit: BoxFit.fill,
-                  'assets/images/head_sebha_logo.png',
-                  height: height * 0.12,
-                  width: width * 0.17,
-                ),
+                child: settingsProvider.isDark
+                    ? Image.asset(
+                        fit: BoxFit.fill,
+                        'assets/images/head_sebha_dark.png',
+                        height: height * 0.12,
+                        width: width * 0.17,
+                      )
+                    : Image.asset(
+                        fit: BoxFit.fill,
+                        'assets/images/head_sebha_logo.png',
+                        height: height * 0.12,
+                        width: width * 0.17,
+                      ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: height * 0.09),
@@ -40,12 +52,19 @@ class _SebhaTabState extends State<SebhaTab> {
                     alignment: Alignment.center,
                     child: Transform.rotate(
                       angle: angle * 3.14 / 180,
-                      child: Image.asset(
-                        fit: BoxFit.fill,
-                        'assets/images/body_sebha_logo.png',
-                        height: height * 0.26,
-                        width: width * 0.56,
-                      ),
+                      child: settingsProvider.isDark
+                          ? Image.asset(
+                              fit: BoxFit.fill,
+                              'assets/images/body_sebha_dark.png',
+                              height: height * 0.26,
+                              width: width * 0.56,
+                            )
+                          : Image.asset(
+                              fit: BoxFit.fill,
+                              'assets/images/body_sebha_logo.png',
+                              height: height * 0.26,
+                              width: width * 0.56,
+                            ),
                     ),
                   ),
                 ),
@@ -56,7 +75,7 @@ class _SebhaTabState extends State<SebhaTab> {
             height: height * 0.05,
           ),
           Text(
-            'عدد التسبيحات',
+            AppLocalizations.of(context)!.sebha_count,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!
@@ -87,13 +106,16 @@ class _SebhaTabState extends State<SebhaTab> {
             height: height * 0.07,
             width: width * 0.5,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: settingsProvider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
               borderRadius: BorderRadius.circular(25),
             ),
             child: Center(
               child: Text(
                 sebhaWord,
-                style: Theme.of(context)
+                style: settingsProvider.isDark?Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(color: Colors.black):Theme.of(context)
                     .textTheme
                     .headlineSmall!
                     .copyWith(color: Colors.white),

@@ -21,6 +21,7 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(
+      elevation: 0,
       foregroundColor: black,
       titleTextStyle: GoogleFonts.elMessiri(
           color: black, fontWeight: FontWeight.bold, fontSize: 30),
@@ -48,15 +49,18 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
+      foregroundColor: white,
       titleTextStyle:
       TextStyle(color: white, fontWeight: FontWeight.w600, fontSize: 25),
       backgroundColor: Colors.transparent,
       centerTitle: true,
+      elevation: 0,
     ),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: gold, fontSize: 20),
-      headlineSmall:
-      TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: white),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.inter(
+          color: gold, fontSize: 20, fontWeight: FontWeight.w400),
+      headlineSmall: GoogleFonts.elMessiri(
+          fontSize: 25, fontWeight: FontWeight.w400, color: white),
     ),
   );
 }
