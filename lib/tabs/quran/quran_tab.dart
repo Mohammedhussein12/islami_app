@@ -40,7 +40,7 @@ class QuranTab extends StatelessWidget {
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    AppLocalizations.of(context)!.verses_number,
+                    AppLocalizations.of(context)!.sura_name,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
@@ -51,7 +51,7 @@ class QuranTab extends StatelessWidget {
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    AppLocalizations.of(context)!.sura_name,
+                    AppLocalizations.of(context)!.verses_number,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
@@ -68,12 +68,6 @@ class QuranTab extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: QuranItem(
-                        item: suraController.versesNumber[index].toString(),
-                      ),
-                    ),
-                    const VerticalDivider(),
-                    Expanded(
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed(
@@ -86,6 +80,12 @@ class QuranTab extends StatelessWidget {
                         child: QuranItem(
                           item: suraController.suraNames[index],
                         ),
+                      ),
+                    ),
+                    const VerticalDivider(),
+                    Expanded(
+                      child: QuranItem(
+                        item: suraController.versesNumber[index].toString(),
                       ),
                     ),
                   ],
