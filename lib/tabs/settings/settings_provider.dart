@@ -31,7 +31,7 @@ class SettingsProvider with ChangeNotifier {
     themeMode = selectedThemeMode;
     CacheData.setData(
         key: 'ThemeMode',
-        value:  selectedThemeMode == ThemeMode.dark ? 'dark' : 'light');
+        value: selectedThemeMode == ThemeMode.dark ? 'dark' : 'light');
     notifyListeners();
   }
 
