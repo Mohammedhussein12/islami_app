@@ -87,9 +87,9 @@ class _SettingsTabState extends State<SettingsTab> {
                         ),
                       );
                     }).toList(),
-                    onChanged: (selsctedLanguage) {
-                      if (selsctedLanguage != null) {
-                        settingsProvider.changeLanguage(selsctedLanguage.code);
+                    onChanged: (selectedLanguage) {
+                      if (selectedLanguage != null) {
+                        settingsProvider.changeLanguage(selectedLanguage.code);
                       }
                     },
                   ),

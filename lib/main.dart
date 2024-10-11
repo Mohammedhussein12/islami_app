@@ -6,8 +6,11 @@ import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:islami/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'cache/cache_helper.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheData.cacheInitialization();
   runApp(
     ChangeNotifierProvider(
       create: (context) => SettingsProvider(),
