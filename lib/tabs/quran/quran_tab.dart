@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:islami/controllers/sura_controller.dart';
 import 'package:islami/tabs/quran/quran_item.dart';
 import 'package:islami/tabs/quran/sura_content_screen.dart';
 import 'package:islami/tabs/quran/sura_details_args.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:islami/utils/app_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../controllers/sura_controller.dart';
 
 class QuranTab extends StatelessWidget {
   const QuranTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     final SuraController suraController = SuraController();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -21,37 +26,36 @@ class QuranTab extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).primaryColor, width: 3),
+              border: Border.all(
+                  color: settingsProvider.isDark
+                      ? AppTheme.gold
+                      : AppTheme.lightPrimary,
+                  width: 3),
             ),
             width: double.infinity,
-            height: height * 0.1,
+            height: height * 0.13,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    'عدد الآيات',
+                    AppLocalizations.of(context)!.sura_name,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: width * 0.05),
-                  child: const VerticalDivider(),
-                ),
-                const SizedBox(width: 16),
+                const VerticalDivider(),
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.center,
-                    'إسم السورة',
+                    AppLocalizations.of(context)!.verses_number,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                 ),
               ],
@@ -64,15 +68,10 @@ class QuranTab extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                        child: QuranItem(
-                            item: suraController.versesNumber[index].toString(),
-                            index: index)),
-                    const VerticalDivider(),
-                    Expanded(
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed(
-                            SuraContentScreen.routeName,
+                            SuraDetailsScreen.routeName,
                             arguments: SuraDetailsArgs(
                                 suraName: suraController.suraNames[index],
                                 index: index),
@@ -80,8 +79,13 @@ class QuranTab extends StatelessWidget {
                         },
                         child: QuranItem(
                           item: suraController.suraNames[index],
-                          index: index,
                         ),
+                      ),
+                    ),
+                    const VerticalDivider(),
+                    Expanded(
+                      child: QuranItem(
+                        item: suraController.versesNumber[index].toString(),
                       ),
                     ),
                   ],

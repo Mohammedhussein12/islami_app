@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami/tabs/quran/sura_content_list_view.dart';
 import 'package:islami/tabs/quran/sura_details_args.dart';
+import 'package:islami/widgets/loading_indicator.dart';
+import 'package:provider/provider.dart';
 import '../../utils/app_theme.dart';
+import '../settings/settings_provider.dart';
 
-class SuraContentScreen extends StatefulWidget {
+class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/suraContentScreen';
 
-  SuraContentScreen({super.key});
+  const SuraDetailsScreen({super.key});
 
   @override
-  State<SuraContentScreen> createState() => _SuraContentScreenState();
+  State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
 }
 
-class _SuraContentScreenState extends State<SuraContentScreen> {
+class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   List<String> ayat = [];
 
   late SuraDetailsArgs args;
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
-    args = ModalRoute
-        .of(context)!
-        .settings
-        .arguments as SuraDetailsArgs;
-    loadSuraFile(args.index);
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    if (ayat.isEmpty) {
+      loadSuraFile();
+    }
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/default_bg.png'),
+          image: settingsProvider.isDark
+              ? const AssetImage('assets/images/dark_bg.png')
+              : const AssetImage('assets/images/default_bg.png'),
         ),
       ),
       child: Scaffold(
@@ -44,16 +44,17 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
           title: const Text('إسلامي'),
         ),
         body: Container(
-          padding: EdgeInsets.only(top: height * 0.02),
-          margin: EdgeInsets.only(
-              top: height * 0.01,
-              bottom: height * 0.02,
-              left: width * 0.07,
-              right: width * 0.07),
-          height: height * 0.74,
+          padding: EdgeInsets.only(top: height * 0.02, bottom: height * 0.01),
+          margin: EdgeInsets.symmetric(
+            horizontal: width * 0.08,
+            vertical: height * 0.02,
+          ),
+          height: height * 0.77,
           width: width * 0.86,
           decoration: BoxDecoration(
-            color: AppTheme.white.withOpacity(0.7),
+            color: settingsProvider.isDark
+                ? AppTheme.darkPrimary.withOpacity(0.9)
+                : AppTheme.white.withOpacity(0.7),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
@@ -63,14 +64,18 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
                 children: [
                   Text(
                     "سورة ${args.suraName}",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headlineSmall,
+                    style: settingsProvider.isDark
+                        ? Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            fontFamily: 'regular', color: AppTheme.gold)
+                        : Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            fontFamily: 'regular', color: AppTheme.black),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(
+                    icon: Icon(
+                      color: settingsProvider.isDark
+                          ? AppTheme.gold
+                          : AppTheme.black,
                       Icons.play_circle,
                       size: 27,
                     ),
@@ -83,22 +88,9 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
                 endIndent: width * 0.10,
               ),
               Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        ayat[index],
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleLarge,
-                      ),
-                    );
-                  },
-                  itemCount: ayat.length,
-                ),
+                child: ayat.isEmpty
+                    ? const LoadingIndicator()
+                    : SuraContentListView(ayat: ayat),
               ),
             ],
           ),
@@ -107,10 +99,10 @@ class _SuraContentScreenState extends State<SuraContentScreen> {
     );
   }
 
-  void loadSuraFile(int index) async {
+  Future<void> loadSuraFile() async {
     final String suraText =
-    await rootBundle.loadString('assets/text/${index + 1}.txt');
-    ayat = suraText.split('\n');
+        await rootBundle.loadString('assets/text/${args.index + 1}.txt');
+    ayat = suraText.trim().split('\r\n');
     setState(() {});
   }
 }

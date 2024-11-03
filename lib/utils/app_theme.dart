@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color lightPrimary = Color(0xffB7935F);
@@ -20,17 +20,19 @@ class AppTheme {
       type: BottomNavigationBarType.fixed,
     ),
     scaffoldBackgroundColor: Colors.transparent,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
+      elevation: 0,
       foregroundColor: black,
-      titleTextStyle:
-          TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 30),
+      titleTextStyle: GoogleFonts.elMessiri(
+          color: black, fontWeight: FontWeight.bold, fontSize: 30),
       backgroundColor: Colors.transparent,
       centerTitle: true,
     ),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: black, fontSize: 20,fontWeight: FontWeight.w400),
-      headlineSmall:
-          TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: black),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.inter(
+          color: black, fontSize: 20, fontWeight: FontWeight.w400),
+      headlineSmall: GoogleFonts.elMessiri(
+          fontSize: 25, fontWeight: FontWeight.w400, color: black),
     ),
   );
   static ThemeData darkTheme = ThemeData(
@@ -47,15 +49,18 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
+      foregroundColor: white,
       titleTextStyle:
-          TextStyle(color: white, fontWeight: FontWeight.w600, fontSize: 25),
+      TextStyle(color: white, fontWeight: FontWeight.w600, fontSize: 25),
       backgroundColor: Colors.transparent,
       centerTitle: true,
+      elevation: 0,
     ),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: gold, fontSize: 20),
-      headlineSmall:
-          TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: white),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.inter(
+          color: gold, fontSize: 20, fontWeight: FontWeight.w400),
+      headlineSmall: GoogleFonts.elMessiri(
+          fontSize: 25, fontWeight: FontWeight.w400, color: white),
     ),
   );
 }
