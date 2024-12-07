@@ -40,7 +40,7 @@ class RadioItem extends StatelessWidget {
                       : AppTheme.lightPrimary,
                   settingsProvider.isDark
                       ? const AssetImage(
-                          'assets/images/Icon awesome-play_gold.png')
+                      'assets/images/Icon awesome-play_gold.png')
                       : const AssetImage('assets/images/Icon awesome-play.png'),
                 ),
               ),
