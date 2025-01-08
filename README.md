@@ -35,7 +35,7 @@ To run this project locally, follow these steps:
    ```bash
    flutter run
 
-🤝 Contribution Guide
+## 🤝 Contribution Guide
 
 We welcome contributions from the community! To contribute:
 
@@ -110,7 +110,7 @@ Watch the demo video to see the application in action: [Demo Video Link](https:/
 
 | Hadeth                                              | Hadeth Content                                                      | Sebha                                             |
 |-----------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------|
-| ![Hadeth Screenshot](assets/screenshots/hadeth.png) | ![Hadeth Content Screenshot](assets/screenshots/hadeth_content.png) | ![Sebha Screenshot](assets/screenshots/sebha.png) |
+| ![Hadeth Screenshot](assets/screenshots/hadeth.png) | ![Hadeth Content Screenshot](assets/screenshots/hadeth_content.png) | ![Sebha Screenshot](assets/screenshots/tasbeeh.png) |
 
 | Radio                                             |
 |---------------------------------------------------|
