@@ -24,7 +24,7 @@ To run this project locally, follow these steps:
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Mohammedhussein12/islami.git
+   git clone [https://github.com/Mohammedhussein12/islami.git](https://github.com/Mohammedhussein12/islami_app.git)
    cd islami
    
 2. Install dependencies:
